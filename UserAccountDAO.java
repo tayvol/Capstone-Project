@@ -10,6 +10,7 @@ public interface UserAccountDAO {
     void save(UserAccount userAccount);
 
     UserAccount findById(int id);
+    //Tanaya Bedase
 
     List<UserAccount> findAll();
 
