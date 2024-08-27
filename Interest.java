@@ -47,6 +47,8 @@ public class Interest {
         return dislikes;
     }
 
+    //Tanaya Bedase
+    
     public void setDislikes(String dislikes) {
         this.dislikes = dislikes;
     }
