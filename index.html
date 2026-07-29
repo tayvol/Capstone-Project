@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dating App | Capstone Project</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Adaptive Dating Recommendation System</title>
 
     <link rel="stylesheet" href="styles.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -31,7 +44,7 @@
 
 <i class="fa-solid fa-heart"></i>
 
-<span>DatingApp</span>
+<span>MatchMate</span>
 
 </div>
 
@@ -39,11 +52,13 @@
 
 <li><a href="#home">Home</a></li>
 
-<li><a href="#features">Features</a></li>
+<li><a href="#search">Search</a></li>
 
-<li><a href="#matches">Matches</a></li>
+<li><a href="#profiles">Profiles</a></li>
 
-<li><a href="#about">About</a></li>
+<li><a href="pages/about.html">About</a></li>
+
+<li><a href="pages/matches.html">Matches</a></li>
 
 </ul>
 
@@ -57,67 +72,110 @@
 
 </header>
 
-
 <!-- ================= HERO ================= -->
 
 <section class="hero" id="home">
 
-<div class="hero-text">
+<div class="hero-content">
 
 <h1>
 
-Find Your
-
-<span>Perfect Match ❤️</span>
+Adaptive Dating Recommendation System
 
 </h1>
 
 <p>
 
-An intelligent dating application that recommends compatible profiles
-based on age, city, interests and hobbies.
-
-Built as a Capstone Project.
+A Java-based Capstone Project that recommends compatible
+profiles using age, city, gender and interests.
 
 </p>
 
-<div class="hero-buttons">
+<a href="#profiles">
 
-<button id="startBtn">
+<button>
 
-Get Started
-
-</button>
-
-<button id="matchBtn">
-
-View Matches
+Explore Profiles
 
 </button>
 
-</div>
+</a>
 
 </div>
 
 <div class="hero-image">
 
 <img
-src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800"
-alt="dating">
+src="images/hero.jpg"
+alt="Hero Image">
 
 </div>
 
 </section>
 
+<!-- ================= STATS ================= -->
 
+<section class="stats">
 
-<!-- ================= SEARCH ================= -->
+<div class="stat-card">
 
-<section class="search-section">
+<h2 id="userCount">
+
+0
+
+</h2>
+
+<p>Total Users</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="matchCount">
+
+0
+
+</h2>
+
+<p>Potential Matches</p>
+
+</div>
+
+<div class="stat-card">
 
 <h2>
 
-Find Matches
+96%
+
+</h2>
+
+<p>Recommendation Accuracy</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>
+
+4
+
+</h2>
+
+<p>Cities</p>
+
+</div>
+
+</section>
+
+<!-- ================= SEARCH ================= -->
+
+<section
+id="search"
+class="search-section">
+
+<h2>
+
+Search Profiles
 
 </h2>
 
@@ -125,33 +183,41 @@ Find Matches
 
 <select id="city">
 
+<option value="">All Cities</option>
+
 <option>Mumbai</option>
 
-<option>Delhi</option>
+<option>New Delhi</option>
 
 <option>Bengaluru</option>
-
-<option>Pune</option>
-
-</select>
-
-
-<select id="age">
-
-<option>20</option>
-<option>21</option>
-<option>22</option>
-<option>23</option>
-<option>24</option>
-<option>25</option>
 
 </select>
 
 <select id="gender">
 
-<option>Female</option>
+<option value="">All Genders</option>
 
 <option>Male</option>
+
+<option>Female</option>
+
+</select>
+
+<select id="age">
+
+<option value="">Any Age</option>
+
+<option>20</option>
+
+<option>21</option>
+
+<option>22</option>
+
+<option>23</option>
+
+<option>24</option>
+
+<option>25</option>
 
 </select>
 
@@ -161,111 +227,43 @@ Search
 
 </button>
 
-</div>
+<button id="resetBtn">
 
-</section>
+Reset
 
-
-
-<!-- ================= STATISTICS ================= -->
-
-<section class="stats">
-
-<div class="card">
-
-<h2 id="usersCount">
-
-0
-
-</h2>
-
-<p>
-
-Users
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2 id="matchCount">
-
-0
-
-</h2>
-
-<p>
-
-Matches
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-
-96%
-
-</h2>
-
-<p>
-
-Success
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>
-
-10+
-
-</h2>
-
-<p>
-
-Cities
-
-</p>
+</button>
 
 </div>
 
 </section>
 
+<!-- ================= USER CARDS ================= -->
 
+<section
+id="profiles"
+class="profiles">
 
-<!-- ================= MATCHES ================= -->
+<h2>
 
-<section id="matches">
-
-<h2 class="section-title">
-
-Recommended Matches
+Recommended Profiles
 
 </h2>
 
-<div id="userContainer" class="user-grid">
-
-<!-- JavaScript loads cards -->
+<div
+id="userContainer"
+class="user-grid">
 
 </div>
 
 </section>
 
+<!-- ================= PROJECT FEATURES ================= -->
 
-
-<!-- ================= FEATURES ================= -->
-
-<section class="features" id="features">
+<section class="features">
 
 <h2>
 
-Features
+Project Features
 
 </h2>
 
@@ -273,17 +271,27 @@ Features
 
 <div class="feature">
 
-<i class="fa-solid fa-user-group"></i>
+<i class="fa-solid fa-users"></i>
 
-<h3>
-
-Profile Matching
-
-</h3>
+<h3>User Profiles</h3>
 
 <p>
 
-Smart recommendations using age, location and interests.
+Create and manage user profiles with interests and hobbies.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h3>City Matching</h3>
+
+<p>
+
+Recommend users from the same city.
 
 </p>
 
@@ -293,15 +301,11 @@ Smart recommendations using age, location and interests.
 
 <i class="fa-solid fa-heart"></i>
 
-<h3>
-
-Like & Pass
-
-</h3>
+<h3>Interest Matching</h3>
 
 <p>
 
-Interact with profiles just like modern dating apps.
+Find compatible users based on interests.
 
 </p>
 
@@ -311,33 +315,11 @@ Interact with profiles just like modern dating apps.
 
 <i class="fa-solid fa-magnifying-glass"></i>
 
-<h3>
-
-Search
-
-</h3>
+<h3>Advanced Search</h3>
 
 <p>
 
-Find users by city and age.
-
-</p>
-
-</div>
-
-<div class="feature">
-
-<i class="fa-solid fa-chart-column"></i>
-
-<h3>
-
-Analytics
-
-</h3>
-
-<p>
-
-Visual statistics of users and matches.
+Filter by age, city and gender.
 
 </p>
 
@@ -347,52 +329,68 @@ Visual statistics of users and matches.
 
 </section>
 
+<!-- ================= TECHNOLOGY ================= -->
 
-
-<!-- ================= ABOUT ================= -->
-
-<section class="about" id="about">
+<section class="tech">
 
 <h2>
 
-About This Project
+Technology Stack
 
 </h2>
 
-<p>
+<div class="tech-grid">
 
-This website is a visual demonstration of the Java-based Dating
-Application developed as a Capstone Project.
+<div>Java</div>
 
-The original backend uses Java classes such as UserAccount,
-Interest and DAO for storing and finding compatible matches.
+<div>HTML5</div>
 
-This GitHub Pages version demonstrates the interface using
-HTML, CSS and JavaScript.
+<div>CSS3</div>
 
-</p>
+<div>JavaScript</div>
+
+<div>DAO Pattern</div>
+
+<div>GitHub Pages</div>
+
+</div>
 
 </section>
-
-
 
 <!-- ================= FOOTER ================= -->
 
 <footer>
 
+<h3>
+
+Adaptive Dating Recommendation System
+
+</h3>
+
 <p>
 
-© 2026 Dating App Capstone Project
+Capstone Project
+
+</p>
+
+<p>
+
+Built using Java concepts and visualized using HTML, CSS & JavaScript.
+
+</p>
+
+<p>
+
+© 2026 All Rights Reserved
 
 </p>
 
 </footer>
-
-
 
 <script src="data.js"></script>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
