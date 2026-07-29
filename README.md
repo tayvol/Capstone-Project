@@ -153,27 +153,27 @@ if(user.getAge()==age &&
 }
 ```
 
+
 ---
 
 ## 📷 Screenshots
 
 ### Home Page
 
-(Add screenshot here)
+<img width="930" height="430" alt="image" src="https://github.com/user-attachments/assets/46b46459-d93f-4dc9-a19d-c37004e364b8" />
 
----
 
 ### Profile Page
 
-(Add screenshot here)
+<img width="926" height="402" alt="image" src="https://github.com/user-attachments/assets/02454eac-5684-4161-8fd1-427036e9cd92" />
+
+
 
 ---
 
 ### Matches Page
+<img width="926" height="425" alt="image" src="https://github.com/user-attachments/assets/8b274ad7-0cc5-4ef6-9c41-ec5c8688c002" />
 
-(Add screenshot here)
-
----
 
 ## 🎯 Learning Outcomes
 
