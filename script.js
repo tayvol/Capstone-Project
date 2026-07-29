@@ -1,141 +1,257 @@
+// ============================================
+// Adaptive Dating Recommendation System
+// script.js
+// ============================================
+
+// ---------- DOM Elements ----------
+
+const userContainer = document.getElementById("userContainer");
+
+const citySelect = document.getElementById("city");
+const ageSelect = document.getElementById("age");
+const genderSelect = document.getElementById("gender");
+
+const searchBtn = document.getElementById("searchBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+const userCount = document.getElementById("userCount");
+const matchCount = document.getElementById("matchCount");
+
+const themeBtn = document.getElementById("themeBtn");
+
+// ---------- Statistics ----------
+
+userCount.textContent = users.length;
+matchCount.textContent = users.length;
+
+// ---------- Display Users ----------
+
 function displayUsers(userList) {
 
     userContainer.innerHTML = "";
 
-    if(userList.length === 0){
+    if (userList.length === 0) {
 
         userContainer.innerHTML = `
-        <div class="no-results">
-            <h2>❤️ No matching profiles found</h2>
-            <p>Try changing your search filters.</p>
-        </div>
+            <div style="grid-column:1/-1;text-align:center;padding:50px;">
+                <h2>No matching profiles found ❤️</h2>
+                <p>Try changing your filters.</p>
+            </div>
         `;
 
         return;
     }
 
-    userList.forEach(user=>{
+    userList.forEach(user => {
 
-        const compatibility = Math.floor(Math.random()*11)+90;
-
-        const online = Math.random() > 0.5;
-
-        const distance = Math.floor(Math.random()*18)+2;
+        const compatibility = calculateCompatibility(user);
 
         const card = document.createElement("div");
 
-        card.className="user-card";
+        card.className = "user-card";
 
         card.innerHTML = `
 
-        <div class="image-wrapper">
-
             <img src="${user.image}" alt="${user.name}">
 
-            <div class="match-badge">
+            <div class="user-info">
 
-                ❤️ ${compatibility}%
+                <h3>${user.name}, ${user.age}</h3>
+
+                <p>📍 ${user.city}</p>
+
+                <p>👤 ${user.gender}</p>
+
+                <p>💰 Income ₹${user.income.toLocaleString()}</p>
+
+                <p style="margin:15px 0;">
+                    ${user.bio}
+                </p>
+
+                <strong>Likes</strong>
+
+                <div class="tags">
+
+                    ${user.likes.map(item=>`
+                        <span>${item}</span>
+                    `).join("")}
+
+                </div>
+
+                <strong>Hobbies</strong>
+
+                <div class="tags">
+
+                    ${user.hobbies.map(item=>`
+                        <span>${item}</span>
+                    `).join("")}
+
+                </div>
+
+                <h4 style="margin-top:20px;color:#ff3b7a;">
+
+                    ❤️ Match ${compatibility}%
+
+                </h4>
+
+                <div class="actions">
+
+                    <button class="like">
+
+                        ❤️ Like
+
+                    </button>
+
+                    <button class="profile">
+
+                        👤 Profile
+
+                    </button>
+
+                    <button class="pass">
+
+                        ❌ Pass
+
+                    </button>
+
+                </div>
 
             </div>
-
-            <div class="${online ? "online":"offline"}">
-
-                ${online ? "🟢 Online":"⚪ Offline"}
-
-            </div>
-
-        </div>
-
-        <div class="user-info">
-
-            <h2>${user.name}, ${user.age}</h2>
-
-            <p>📍 ${user.city}</p>
-
-            <p>${distance} km away</p>
-
-            <p>${user.bio}</p>
-
-            <div class="tags">
-
-                ${user.likes.map(tag=>`
-                    <span>${tag}</span>
-                `).join("")}
-
-            </div>
-
-            <div class="tags">
-
-                ${user.hobbies.map(tag=>`
-                    <span>🎨 ${tag}</span>
-                `).join("")}
-
-            </div>
-
-            <div class="actions">
-
-                <button class="like">
-
-                    ❤️ Like
-
-                </button>
-
-                <button class="profile">
-
-                    👤 Profile
-
-                </button>
-
-                <button class="pass">
-
-                    ❌ Pass
-
-                </button>
-
-            </div>
-
-        </div>
 
         `;
 
-        /* Like */
+        // Like Button
 
-        card.querySelector(".like").onclick=()=>{
+        card.querySelector(".like").addEventListener("click", () => {
 
-            card.classList.add("liked");
+            alert("You liked " + user.name + " ❤️");
 
-            setTimeout(()=>{
+        });
 
-                alert(`❤️ You liked ${user.name}`);
+        // Pass Button
 
-            },300);
+        card.querySelector(".pass").addEventListener("click", () => {
 
-        };
+            card.remove();
 
-        /* Pass */
+        });
 
-        card.querySelector(".pass").onclick=()=>{
+        // Profile Button
 
-            card.classList.add("remove");
+        card.querySelector(".profile").addEventListener("click", () => {
 
-            setTimeout(()=>{
+            localStorage.setItem("selectedUser", JSON.stringify(user));
 
-                card.remove();
+            window.location.href = "pages/profile.html";
 
-            },400);
-
-        };
-
-        /* Profile */
-
-        card.querySelector(".profile").onclick=()=>{
-
-            window.location.href=`pages/profile.html?id=${user.id}`;
-
-        };
+        });
 
         userContainer.appendChild(card);
 
     });
 
 }
+
+// ---------- Compatibility ----------
+
+function calculateCompatibility(user){
+
+    let score = 70;
+
+    if(user.city === "Mumbai")
+        score += 8;
+
+    if(user.likes.length > 0)
+        score += 7;
+
+    if(user.hobbies.length > 0)
+        score += 5;
+
+    score += Math.floor(Math.random()*10);
+
+    if(score > 99)
+        score = 99;
+
+    return score;
+
+}
+
+// ---------- Search ----------
+
+searchBtn.addEventListener("click",()=>{
+
+    let filtered = users.filter(user=>{
+
+        const cityMatch =
+            citySelect.value === "" ||
+            user.city === citySelect.value;
+
+        const genderMatch =
+            genderSelect.value === "" ||
+            user.gender === genderSelect.value;
+
+        const ageMatch =
+            ageSelect.value === "" ||
+            user.age == ageSelect.value;
+
+        return cityMatch &&
+               genderMatch &&
+               ageMatch;
+
+    });
+
+    matchCount.textContent = filtered.length;
+
+    displayUsers(filtered);
+
+});
+
+// ---------- Reset ----------
+
+resetBtn.addEventListener("click",()=>{
+
+    citySelect.value = "";
+    genderSelect.value = "";
+    ageSelect.value = "";
+
+    matchCount.textContent = users.length;
+
+    displayUsers(users);
+
+});
+
+// ---------- Dark Mode ----------
+
+const savedTheme = localStorage.getItem("theme");
+
+if(savedTheme==="dark"){
+
+    document.body.classList.add("dark");
+
+    themeBtn.innerHTML='<i class="fa-solid fa-sun"></i>';
+
+}
+
+themeBtn.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+
+        localStorage.setItem("theme","dark");
+
+        themeBtn.innerHTML='<i class="fa-solid fa-sun"></i>';
+
+    }else{
+
+        localStorage.setItem("theme","light");
+
+        themeBtn.innerHTML='<i class="fa-solid fa-moon"></i>';
+
+    }
+
+});
+
+// ---------- Initial Load ----------
+
+displayUsers(users);
