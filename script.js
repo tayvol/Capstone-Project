@@ -1,54 +1,66 @@
-// ===============================
-// Dating App JavaScript
-// ===============================
+// ==========================================
+// Dating App - script.js
+// ==========================================
 
+// ----------------------------
 // DOM Elements
+// ----------------------------
+
 const userContainer = document.getElementById("userContainer");
+
 const citySelect = document.getElementById("city");
 const ageSelect = document.getElementById("age");
 const genderSelect = document.getElementById("gender");
+
 const searchBtn = document.getElementById("searchBtn");
+
+const startBtn = document.getElementById("startBtn");
+const matchBtn = document.getElementById("matchBtn");
+
 const themeBtn = document.getElementById("themeBtn");
 
 const usersCount = document.getElementById("usersCount");
 const matchCount = document.getElementById("matchCount");
 
-// ===============================
+// ----------------------------
 // Statistics
-// ===============================
+// ----------------------------
 
-usersCount.innerText = users.length;
-matchCount.innerText = users.length;
+usersCount.textContent = users.length;
+matchCount.textContent = users.length;
 
-// ===============================
+// ----------------------------
 // Display Users
-// ===============================
+// ----------------------------
 
-function displayUsers(list){
+function displayUsers(userList) {
 
     userContainer.innerHTML = "";
 
-    if(list.length === 0){
+    if (userList.length === 0) {
 
         userContainer.innerHTML = `
-            <h2 style="text-align:center;width:100%;">
-                No matching profiles found ❤️
-            </h2>
+            <div style="
+                width:100%;
+                text-align:center;
+                padding:50px;
+            ">
+                <h2>No matching profiles found ❤️</h2>
+            </div>
         `;
 
         return;
     }
 
-    list.forEach(user=>{
+    userList.forEach(user => {
 
-        const card=document.createElement("div");
+        const compatibility = Math.floor(Math.random() * 15) + 85;
 
-        card.className="user-card";
+        const card = document.createElement("div");
 
-        // Compatibility Score
-        const score=Math.floor(Math.random()*15)+85;
+        card.className = "user-card";
 
-        card.innerHTML=`
+        card.innerHTML = `
 
             <img src="${user.image}" alt="${user.name}">
 
@@ -56,74 +68,88 @@ function displayUsers(list){
 
                 <h3>${user.name}, ${user.age}</h3>
 
-                <p>
-                    📍 ${user.city}
-                </p>
+                <p>📍 ${user.city}</p>
 
-                <p>
-                    💰 Income ₹${user.income.toLocaleString()}
-                </p>
+                <p>👤 ${user.gender}</p>
 
-                <p style="margin-top:10px;">
+                <p>💰 Income ₹${user.income.toLocaleString()}</p>
+
+                <p style="margin-top:15px;">
                     ${user.bio}
                 </p>
 
                 <div class="tags">
 
-                    ${user.likes.map(item=>`<span>${item}</span>`).join("")}
+                    ${user.likes.map(like => `
+                        <span>${like}</span>
+                    `).join("")}
 
                 </div>
 
                 <div class="tags">
 
-                    ${user.hobbies.map(item=>`<span>🎨 ${item}</span>`).join("")}
+                    ${user.hobbies.map(hobby => `
+                        <span>🎨 ${hobby}</span>
+                    `).join("")}
 
                 </div>
 
-                <h4 style="margin-top:18px;color:#ff3b7a;">
+                <h4 style="
+                    margin-top:18px;
+                    color:#ff3b7a;
+                ">
 
-                    ❤️ Compatibility ${score}%
+                    ❤️ Compatibility ${compatibility}%
 
                 </h4>
 
-
                 <div class="actions">
 
-<button class="like">
+                    <button class="like">
+                        ❤️ Like
+                    </button>
 
-❤️ Like
+                    <button class="pass">
+                        ❌ Pass
+                    </button>
 
-</button>
+                    <button class="profile">
+                        👤 Profile
+                    </button>
 
-<button class="pass">
-
-Pass
-
-</button>
-
-<button class="profile">
-
-Profile
-
-</button>
-
-</div> 
+                </div>
 
             </div>
 
         `;
 
-        // Like Button
-        card.querySelector(".like").addEventListener("click",()=>{
+        // ----------------------------
+        // Like
+        // ----------------------------
 
-            alert(`You liked ${user.name}! ❤️`);
+        card.querySelector(".like").addEventListener("click", () => {
+
+            alert(`❤️ You liked ${user.name}!`);
 
         });
 
-        // Pass Button
-        card.querySelector(".pass").addEventListener("click",()=>{
+        // ----------------------------
+        // Pass
+        // ----------------------------
+
+        card.querySelector(".pass").addEventListener("click", () => {
 
             card.remove();
+
+        });
+
+        // ----------------------------
+        // Profile
+        // ----------------------------
+
+        card.querySelector(".profile").addEventListener("click", () => {
+
+            window.location.href = `pages/profile.html?id=${user.id}`;
 
         });
 
@@ -133,106 +159,128 @@ Profile
 
 }
 
+// ----------------------------
 // Initial Display
+// ----------------------------
+
 displayUsers(users);
 
-// ===============================
-// Search
-// ===============================
+// ----------------------------
+// Search Function
+// ----------------------------
 
-searchBtn.addEventListener("click",()=>{
+searchBtn.addEventListener("click", () => {
 
-    const city=citySelect.value;
-    const age=parseInt(ageSelect.value);
-    const gender=genderSelect.value;
+    const city = citySelect.value;
 
-    const result=users.filter(user=>{
+    const age = parseInt(ageSelect.value);
+
+    const gender = genderSelect.value;
+
+    const filteredUsers = users.filter(user => {
 
         return (
 
-            user.city===city &&
+            user.city === city &&
 
-            user.age===age &&
+            user.age === age &&
 
-            user.gender===gender
+            user.gender === gender
 
         );
 
     });
 
-    displayUsers(result);
+    displayUsers(filteredUsers);
 
 });
 
-// ===============================
+// ----------------------------
 // Hero Buttons
-// ===============================
+// ----------------------------
 
-document.getElementById("startBtn").addEventListener("click",()=>{
-
-    document
-        .getElementById("matches")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-});
-
-document.getElementById("matchBtn").addEventListener("click",()=>{
+startBtn.addEventListener("click", () => {
 
     document
         .getElementById("matches")
         .scrollIntoView({
-            behavior:"smooth"
+            behavior: "smooth"
         });
 
 });
 
-// ===============================
+matchBtn.addEventListener("click", () => {
+
+    document
+        .getElementById("matches")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+});
+
+// ----------------------------
 // Dark Mode
-// ===============================
+// ----------------------------
 
-themeBtn.addEventListener("click",()=>{
+themeBtn.addEventListener("click", () => {
 
     document.body.classList.toggle("dark");
 
-    const icon=themeBtn.querySelector("i");
+    const icon = themeBtn.querySelector("i");
 
-    if(document.body.classList.contains("dark")){
+    if (document.body.classList.contains("dark")) {
 
-        icon.className="fa-solid fa-sun";
+        icon.className = "fa-solid fa-sun";
 
-    }else{
+    } else {
 
-        icon.className="fa-solid fa-moon";
+        icon.className = "fa-solid fa-moon";
 
     }
 
 });
 
-// ===============================
-// Card Fade-In Animation
-// ===============================
+// ----------------------------
+// Scroll Animation
+// ----------------------------
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
-    const cards=document.querySelectorAll(".user-card");
+    const cards = document.querySelectorAll(".user-card");
 
-    cards.forEach((card,index)=>{
+    cards.forEach((card, index) => {
 
-        card.style.opacity=0;
+        card.style.opacity = "0";
+        card.style.transform = "translateY(40px)";
 
-        card.style.transform="translateY(40px)";
+        setTimeout(() => {
 
-        setTimeout(()=>{
+            card.style.transition = "0.6s";
 
-            card.style.transition=".6s";
+            card.style.opacity = "1";
 
-            card.style.opacity=1;
+            card.style.transform = "translateY(0)";
 
-            card.style.transform="translateY(0)";
+        }, index * 150);
 
-        },index*150);
+    });
+
+});
+
+// ----------------------------
+// Navbar Active Link
+// ----------------------------
+
+const navLinks = document.querySelectorAll(".nav-links a");
+
+navLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.forEach(item => item.classList.remove("active"));
+
+        link.classList.add("active");
 
     });
 
