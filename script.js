@@ -86,21 +86,28 @@ function displayUsers(list){
 
                 </h4>
 
+
                 <div class="actions">
 
-                    <button class="like">
+<button class="like">
 
-                        ❤️ Like
+❤️ Like
 
-                    </button>
+</button>
 
-                    <button class="pass">
+<button class="pass">
 
-                        ❌ Pass
+Pass
 
-                    </button>
+</button>
 
-                </div>
+<button class="profile">
+
+Profile
+
+</button>
+
+</div> 
 
             </div>
 
