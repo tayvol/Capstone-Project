@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>User Profile</title>
+
+<link rel="stylesheet" href="../styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+
+❤️ DatingApp
+
+</div>
+
+<a href="../index.html">
+
+<button id="startBtn">
+
+← Back Home
+
+</button>
+
+</a>
+
+</nav>
+
+<section
+style="
+padding:70px 8%;
+display:flex;
+justify-content:center;
+">
+
+<div
+id="profileCard"
+style="
+background:white;
+max-width:900px;
+width:100%;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+overflow:hidden;
+">
+
+</div>
+
+</section>
+
+<script src="../data.js"></script>
+
+<script>
+
+const params=new URLSearchParams(window.location.search);
+
+const id=parseInt(params.get("id"));
+
+const user=users.find(u=>u.id===id);
+
+const card=document.getElementById("profileCard");
+
+if(user){
+
+card.innerHTML=`
+
+<img
+src="${user.image}"
+style="
+width:100%;
+height:420px;
+object-fit:cover;
+">
+
+<div style="padding:35px;">
+
+<h1>${user.name}</h1>
+
+<h3>${user.age} years</h3>
+
+<p>📍 ${user.city}</p>
+
+<p>👤 ${user.gender}</p>
+
+<p>💰 Income ₹${user.income.toLocaleString()}</p>
+
+<br>
+
+<h2>About</h2>
+
+<p>${user.bio}</p>
+
+<br>
+
+<h2>Likes</h2>
+
+<ul>
+
+${user.likes.map(item=>`<li>${item}</li>`).join("")}
+
+</ul>
+
+<br>
+
+<h2>Dislikes</h2>
+
+<ul>
+
+${user.dislikes.map(item=>`<li>${item}</li>`).join("")}
+
+</ul>
+
+<br>
+
+<h2>Hobbies</h2>
+
+<ul>
+
+${user.hobbies.map(item=>`<li>${item}</li>`).join("")}
+
+</ul>
+
+<br>
+
+<button
+style="
+padding:15px 30px;
+border:none;
+background:#ff3b7a;
+color:white;
+border-radius:8px;
+cursor:pointer;
+"
+onclick="alert('You liked ${user.name}! ❤️')">
+
+❤️ Like
+
+</button>
+
+</div>
+
+`;
+
+}else{
+
+card.innerHTML="<h2 style='padding:40px'>User not found.</h2>";
+
+}
+
+</script>
+
+</body>
+
+</html>
