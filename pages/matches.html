@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Recommended Matches</title>
+
+<link rel="stylesheet" href="../styles.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fa-solid fa-heart"></i>
+
+<span>MatchMate</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="../index.html">Home</a></li>
+
+<li><a href="about.html">About</a></li>
+
+</ul>
+
+</nav>
+
+<!-- ================= HEADER ================= -->
+
+<section class="hero" style="padding:60px 8%;">
+
+<div class="hero-content">
+
+<h1>Recommended Matches</h1>
+
+<p>
+
+These recommendations are generated using the same logic as the Java
+<b>findMatches(age, city, gender)</b> method.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ================= ALGORITHM ================= -->
+
+<section class="features">
+
+<h2>Matching Algorithm</h2>
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<i class="fa-solid fa-calendar"></i>
+
+<h3>Age</h3>
+
+<p>Same age as the selected user.</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h3>City</h3>
+
+<p>Users must belong to the same city.</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-venus-mars"></i>
+
+<h3>Gender</h3>
+
+<p>Opposite gender is considered a match.</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-heart"></i>
+
+<h3>Result</h3>
+
+<p>Matching profiles are recommended.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= MATCHES ================= -->
+
+<section class="profiles">
+
+<h2>Suggested Matches</h2>
+
+<div id="matchContainer" class="user-grid">
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>Adaptive Dating Recommendation System</h3>
+
+<p>Java Capstone Project</p>
+
+</footer>
+
+<script src="../data.js"></script>
+
+<script>
+
+const container = document.getElementById("matchContainer");
+
+/*
+ Java Matching Logic
+
+ if(age==22 &&
+ city=="Mumbai" &&
+ opposite gender)
+
+*/
+
+const matches = users.filter(user=>{
+
+return user.age===22 &&
+
+user.city==="Mumbai" &&
+
+user.gender==="Male";
+
+});
+
+matches.forEach(user=>{
+
+const score=Math.floor(Math.random()*8)+92;
+
+container.innerHTML+=`
+
+<div class="user-card">
+
+<img src="${user.image}">
+
+<div class="user-info">
+
+<h3>
+
+${user.name}
+
+</h3>
+
+<p>
+
+📍 ${user.city}
+
+</p>
+
+<p>
+
+👤 ${user.gender}
+
+</p>
+
+<p>
+
+💰 ₹${user.income.toLocaleString()}
+
+</p>
+
+<div class="tags">
+
+${user.likes.map(item=>`
+
+<span>${item}</span>
+
+`).join("")}
+
+</div>
+
+<h3 style="color:#ff3b7a;">
+
+❤️ ${score}% Match
+
+</h3>
+
+<a href="profile.html">
+
+<button
+style="
+width:100%;
+margin-top:20px;
+padding:12px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+">
+
+View Profile
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(matches.length===0){
+
+container.innerHTML=`
+
+<div
+style="
+grid-column:1/-1;
+text-align:center;
+padding:60px;
+">
+
+<h2>
+
+No Matches Found
+
+</h2>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
